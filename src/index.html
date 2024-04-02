@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auton Sim</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/61a99bede6.js" crossorigin="anonymous"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main>    
+        <div class="sidebar code-sidebar"></div>
+
+        <div class="visual-planner">
+            <div class="field-controls">
+                <button id="match-field-button" type="button">Match Field</button>
+                <button id="skills-field-button" type="button">Skills Field</button>
+            </div>
+
+            <div class="field">
+                <canvas id="field-canvas"></canvas>
+                <img id="match-field" src="../img/field-match.png" alt="Match Field">
+                <img id="skills-field" src="../img/field-skills.png" alt="Skills Field">
+            </div>
+
+            <div class="media-controls">
+                <button id="play-button"><i class="fa-solid fa-play"></i></button>
+                <button id="pause-button"><i class="fa-solid fa-pause"></i></button>
+                <button id="reset-button"><i class="fa-solid fa-undo"></i></button>
+            </div>
+        </div>
+        
+        
+        <div class="sidebar config-sidebar">
+            <div class="robot-config">
+                <h2>Robot</h2>
+                <div class="coords">
+                    <h3>Coordinates</h3>
+                    <table>
+                        <tr>
+                            <td align="right">
+                                <label for="x-coord">X:</label>
+                            </td>
+                            <td align="left">
+                                <input type="number" inputmode="numeric" id="robot-x" name="robot-x">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label for="y-coord">Y:</label>
+                            </td>
+                            <td align="left">
+                                <input type="number" inputmode="numeric" id="robot-y" name="robot-y">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <label for="angle">Angle:</label>
+                            </td>
+                            <td align="left">
+                                <input type="number" inputmode="numeric" id="robot-angle" name="robot-angle">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="selected-container">
+                        <label for="selected">Selected: <span id="selected-var"></span></label>
+                    </div>
+                </div>
+    
+                <hr id="hori-line">
+
+                <div class="size-config">
+                    <h3>Configuration</h3>
+                    <table>
+                        <tr>
+                            <td align="left">
+                                <div class="robot-width">
+                                    <label for="width">Width:</label>
+                                    <input type="number" id="robot-width" name="robot-width">
+                                    <p class="size-units"></p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="robot-height">
+                                    <label for="height">Height:</label>
+                                    <input type="number" id="robot-height" name="robot-height">
+                                    <p class="size-units"></p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="visibility">Visible:</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="robot-visible" name="robot-visible">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div> 
+    </main>
+</body>
+</html>
