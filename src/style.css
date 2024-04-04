@@ -16,6 +16,23 @@ main {
     font: 16px 'Lato', sans-serif;
 }
 
+#hit-counter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+#signature {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Fira Code', monospace;
+    text-align: right;
+}
 
 /* Visual Planner */
 .visual-planner {
