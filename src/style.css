@@ -80,7 +80,9 @@ main {
         }
 
         #field-canvas {
-            z-index: 2;
+            border: 5px solid white;
+            border-radius: 5px;
+            z-index: 9999;
         }
 
         #match-field {
@@ -171,11 +173,25 @@ main {
             }
 
                     input {
-                        height: 30px;
-                        font: 20px 'Lato', sans-serif;
+                        font: 18px 'Lato', sans-serif;
                         background-color: transparent;
-                        border: 2px solid #606060;
+                        border: none;
+                        color: white;
+                    }
+
+                    input:focus {
+                        outline: none;
+                      }
+
+                    .coords input {
+                        height: 30px;
+                        border-bottom: 2px solid #606060;
+                    }
+
+                    .size-config input {
+                        height: 40px;
                         border-radius: 5px;
+                        border: 2px solid #606060;
                     }
 
                     input::-webkit-outer-spin-button,
@@ -183,6 +199,7 @@ main {
                         -webkit-appearance: none;
                         margin: 0;
                     }
+                    
                     input[type=number]{
                         -moz-appearance: textfield;
                     }
@@ -199,13 +216,12 @@ main {
                 .size-config label:not([for="visibility"]) {
                     position: relative;
                     left: 20%;
-                    top: 10px;
+                    top: 8px;
                     background-color: #303030;
-                    padding: 0px;
+                    padding: 5px;
                     margin: 0px;
                     border-radius: 5px;
-                    border-top: 2px solid;
-                    border-image: linear-gradient(#606060 50%, transparent 50%) 100% 1;
+                    font-size: 13px;
                 }
 
                 
