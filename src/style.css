@@ -1,4 +1,5 @@
 @import "font.css";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 body {
     margin: 0;
@@ -140,6 +141,25 @@ main {
 
     .code-sidebar {
         width: 30vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #code-textbox {
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        background-color: #202020;
+        border-radius: 5px;
+        border: 2px solid #606060;
+        box-shadow: 0 0 5px #606060;
+        resize: none;
+    }
+
+    #code-textbox .CodeMirror {
+        font-family: 'Fira Code', monospace;
+        font-size: 16px;
+        background: transparent;
     }
 
     .config-sidebar {

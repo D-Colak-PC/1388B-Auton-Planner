@@ -210,7 +210,7 @@ function handleMouseDown(e) {
     robotY.addEventListener('input', updateRobotY);
     robotAngle.addEventListener('input', updateRobotAngle);
 
-    updateSidebar();
+    updateSidebars();
     console.log("mouse down, selecting point", points.indexOf(selectedPoint) + 1, ". Selected point:", selectedPoint);
 }
 
@@ -233,7 +233,7 @@ function removePoint(point) {
         selectedPoint = null;
     }
 
-    updateSidebar();
+    updateSidebars();
 }
 
 function movePoint() {
@@ -241,7 +241,7 @@ function movePoint() {
         selectedPoint.moveToPoint(mouseX, mouseY);
     }
 
-    updateSidebar();
+    updateSidebars();
     console.log("mouse move, moving point", points.indexOf(selectedPoint) + 1);
 }
 
@@ -260,7 +260,7 @@ function changeAngle(e) {
         selectedPoint.rotate(2 * direction * Math.PI / 180); // Rotate the selected point by 1 degree
     }
 
-    updateSidebar();
+    updateSidebars();
     console.log("mouse wheel, changing angle of point", points.indexOf(selectedPoint) + 1, "from", oldTheta, "to", selectedPoint.theta * 180 / Math.PI);
 }
 
@@ -273,7 +273,7 @@ function updateRobotX() {
         selectedPoint.moveToPoint(convertFieldUnitsToPixel(xInputValue), selectedPoint.y);
     }
 
-    updateSidebar();
+    updateSidebars();
     console.log("updating robot x to", robotX.value, ". Selected point:", points.indexOf(selectedPoint) + 1);
 }
 
@@ -284,7 +284,7 @@ function updateRobotY() {
         selectedPoint.moveToPoint(selectedPoint.x, convertFieldUnitsToPixel(yInputValue));
     }
 
-    updateSidebar();
+    updateSidebars();
     console.log("updating robot y to", robotY.value, ". Selected point:", points.indexOf(selectedPoint) + 1);
 }
 
@@ -296,7 +296,7 @@ function updateRobotAngle() {
         selectedPoint.theta = angleInputValue * Math.PI / 180;
     }
 
-    updateSidebar();
+    updateSidebars();
     console.log("updating robot angle to", robotAngle.value, ". Selected point:", points.indexOf(selectedPoint) + 1);
 }
 
@@ -331,7 +331,7 @@ function update() {
 
 update();
 
-function updateSidebar() {
+function updateSidebars() {
     if (selectedPoint) {
         robotX.value = formatNumberWithCeiling(convertPixelToFieldUnits(selectedPoint.x));
         robotY.value = formatNumberWithCeiling(convertPixelToFieldUnits(selectedPoint.y));
@@ -343,6 +343,31 @@ function updateSidebar() {
         robotAngle.value = '';
         selectedVar.innerText = "None";
     }
+
+    // update codebar
+    let newCode = '';
+    points.forEach((point, index) => {
+        if (index === points.length - 1) { // Skip the last point
+            return;
+        }
+
+        const distance = Math.sqrt(point.distanceTo_Squared(points[index + 1]));
+        const angle = point.angleTo(points[index + 1]);
+        
+        newCode +=
+        'driveFor(forward, ' + 
+        formatNumberWithCeiling(convertPixelToFieldUnits(distance)) + 
+        ', inches);\n';
+
+        if (angle) {
+            newCode += 'turnFor(' +
+            (angle > 0 ? 'right, ' : 'left, ') +
+            Math.abs(formatNumberWithCeiling(angle * 180 / Math.PI)) +
+            ', degrees);\n';
+        }
+    });
+
+    codeTextbox.setValue(newCode);  
 }
 
 function convertPixelToFieldUnits(number) {
@@ -362,3 +387,11 @@ function formatNumberWithCeiling(number, decimalPlaces=6) {
 
     return formattedNumber;
 }
+
+const codeTextbox = CodeMirror(document.getElementById('code-textbox'), {
+    mode: 'text/x-c++src',
+    theme: 'material-darker',
+});
+
+codeTextbox.setSize('100%', '100%');
+

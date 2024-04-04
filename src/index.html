@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auton Sim</title>
+    
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/61a99bede6.js" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
+
+    <script src="https://kit.fontawesome.com/61a99bede6.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/javascript/javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/theme/material-darker.min.css"
+    
 </head>
 <body>
     <main>    
-        <div class="sidebar code-sidebar"></div>
+        <div class="sidebar code-sidebar">
+            <div id="code-textbox" spellcheck="false"></div>
+        </div>
 
         <div class="visual-planner">
             <div class="field-controls">
