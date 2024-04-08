@@ -100,6 +100,11 @@ class Point {
         this.theta %= (2 * Math.PI);
     }
 
+    rotateTo(theta) {
+        this.theta = theta;
+        this.theta %= (2 * Math.PI);
+    }
+
     distanceTo_Squared(point) { // no sqrt calculations -- they are expensive
         return (this.x - point.x)**2 + (this.y - point.y)**2; // 0, 0 at center of canvas
     }
@@ -181,10 +186,12 @@ class Point {
 }
 
 
-console.log("amogus")
+console.log("<G1> 343X is permanently banned from competing in VEX Robotics");
+console.log("source: trust me bro");
 
 let points = [];
 points.push(new Point(0, 0, 0));
+
 
 
 let selectedPoint = null; // Declare the selectedPoint variable outside of the animate function
@@ -201,6 +208,7 @@ function handleMouseDown(e) {
         points.push(newPoint);
         selectedPoint = newPoint;
     }
+    updateAngleWithMove();
 
     fieldCanvas.addEventListener('mousemove', movePoint);
     fieldCanvas.addEventListener('wheel', changeAngle);
@@ -239,12 +247,26 @@ function removePoint(point) {
 function movePoint() {
     if (selectedPoint) { // Check if selectedPoint is not null
         selectedPoint.moveToPoint(mouseX, mouseY);
+
+        updateAngleWithMove();
+
     }
 
     updateSidebars();
     console.log("mouse move, moving point", points.indexOf(selectedPoint) + 1);
 }
 
+function updateAngleWithMove() {
+    if (selectedPoint) {
+        const prevPoint = points[points.indexOf(selectedPoint) - 1];
+        if (prevPoint) {
+            selectedPoint.theta = Math.atan2(selectedPoint.y - prevPoint.y, selectedPoint.x - prevPoint.x);
+        }
+    }
+
+    updateSidebars();
+    console.log("mouse move, updating angle of point", points.indexOf(selectedPoint) + 1);
+}
 function stopMovingPoint() {
     fieldCanvas.removeEventListener('mousemove', movePoint);
     fieldCanvas.removeEventListener('mouseup', stopMovingPoint);
@@ -352,7 +374,7 @@ function updateSidebars() {
         }
 
         const distance = Math.sqrt(point.distanceTo_Squared(points[index + 1]));
-        const angle = point.angleTo(points[index + 1]);
+        const angle = points[index + 1].theta - point.theta;
         
         newCode +=
         'driveFor(forward, ' + 
@@ -394,4 +416,6 @@ const codeTextbox = CodeMirror(document.getElementById('code-textbox'), {
 });
 
 codeTextbox.setSize('100%', '100%');
+
+console.log("<G2> 1388B is by default the VEX world champion");
 
