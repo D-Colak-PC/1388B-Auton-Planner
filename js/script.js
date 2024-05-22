@@ -376,17 +376,17 @@ function updateSidebars() {
         const distance = Math.sqrt(point.distanceTo_Squared(points[index + 1]));
         const angle = points[index + 1].theta - point.theta;
         
-        newCode +=
-        'driveFor(forward, ' + 
-        formatNumberWithCeiling(convertPixelToFieldUnits(distance)) + 
-        ', inches);\n';
-
         if (angle) {
             newCode += 'turnFor(' +
             (angle > 0 ? 'right, ' : 'left, ') +
             Math.abs(formatNumberWithCeiling(angle * 180 / Math.PI)) +
             ', degrees);\n';
         }
+
+        newCode +=
+        'driveFor(forward, ' + 
+        formatNumberWithCeiling(convertPixelToFieldUnits(distance)) + 
+        ', inches);\n';
     });
 
     codeTextbox.setValue(newCode);  
